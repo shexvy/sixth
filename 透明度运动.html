@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        div {
+            width :200px;
+            height :200px;
+            background:red;
+            opacity: 1;
+        }
+        /* button {
+            position :relative;
+            top :120px;
+            width :60px;
+            height :20px;
+            background: #999;
+        }
+        span {
+            position :absolute;
+            top :0px;
+            left :600px;
+            width :1px;
+            height :100px;
+            background: #000;
+        } */
+        /* .wrapper {
+            position: absolute;
+            top: 200px;
+            left: -400px;
+            width: 400px;
+            height:80px;
+            background: yellow;
+        }
+        .wrapper .show {
+            position:absolute;
+            top: 0px;
+            right:-40px;
+            width: 40px;
+            height: 80px;
+            background: orange;
+        } */
+
+    </style>
+</head>
+<body>
+    <div></div>
+
+    <script>
+        // var obtn = document.getElementsByTagName('button')[0];
+        // var odiv = document.getElementsByTagName('div')[0];
+        // var timer = null;
+        // obtn.onclick = function () {
+        //     startMove(odiv);
+        // }
+        var oDiv = document.getElementsByTagName('div')[0];
+        oDiv.onclick = function () {
+            startMove(this, 20)
+        }
+        function getStyle (obj , attr) {
+            if(obj.currentStyle){
+                return obj.currentStyle[attr];
+            }else{
+                return window.getComputedStyle(obj, false)[attr];
+            }
+        }
+        var timer = null;
+        // oDiv.onmouseenter = function () {
+        //     startMove(oDiv , 0);
+        // }
+        // oDiv.onmouseleave = function () {
+        //     startMove(oDiv , -400);
+        // }
+        function startMove (obj , Target) {
+            var speed;
+            clearInterval(timer);
+            timer = setInterval(function () {
+                speed = (Target - getStyle(obj, 'opacity') * 100) / 17;
+                speed = speed > 0 ? Math.ceil(speed) : Math.floor(speed);
+                if(speed == 0){
+                    clearInterval(timer);
+                    console.log(speed);
+                }else{
+                    obj.style.opacity = (getStyle(obj, 'opacity') * 100 + speed)/100;}
+            },30)
+        }
+    </script>
+</body>
+</html>

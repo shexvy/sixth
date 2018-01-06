@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        /* div {
+            position :absolute;
+            top :0;
+            left :1100px;
+            width :100px;
+            height :100px;
+            background: yellow;
+        }
+        button {
+            position :relative;
+            top :120px;
+            width :60px;
+            height :20px;
+            background: #999;
+        }
+        span {
+            position :absolute;
+            top :0px;
+            left :600px;
+            width :1px;
+            height :100px;
+            background: #000;
+        } */
+        .wrapper {
+            position: absolute;
+            top: 200px;
+            left: -400px;
+            width: 400px;
+            height:80px;
+            background: yellow;
+        }
+        .wrapper .show {
+            position:absolute;
+            top: 0px;
+            right:-40px;
+            width: 40px;
+            height: 80px;
+            background: orange;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="show"></div>
+    </div>
+
+    <script>
+        // var obtn = document.getElementsByTagName('button')[0];
+        // var odiv = document.getElementsByTagName('div')[0];
+        // var timer = null;
+        // obtn.onclick = function () {
+        //     startMove(odiv);
+        // }
+        var oDivWrapper = document.getElementsByTagName('div')[0];
+        var timer = null;
+        oDivWrapper.onmouseenter = function () {
+            startMove(oDivWrapper , 0);
+        }
+        oDivWrapper.onmouseleave = function () {
+            startMove(oDivWrapper , -400);
+        }
+        function startMove (obj , Target) {
+            var speed;
+            clearInterval(timer);
+            timer = setInterval(function () {
+                speed = (Target - obj.offsetLeft)/17;
+                speed = speed > 0 ? Math.ceil(speed) : Math.floor(speed);
+                if(speed == 0){
+                    clearInterval(timer);
+                }else{
+                    obj.style.left = obj.offsetLeft + speed + 'px';}
+            },30)
+        }
+    </script>
+</body>
+</html>

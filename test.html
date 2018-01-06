@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        div {
+            width :100px;
+            height :100px;
+            margin-bottom: 30px;
+            background: red;
+            opacity: 1;
+            border: 1px solid #000;
+        }
+    </style>
+</head>
+<body>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+
+    <script>
+        // var obtn = document.getElementsByTagName('button')[0];
+        // var odiv = document.getElementsByTagName('div')[0];
+        // var timer = null;
+        // obtn.onclick = function () {
+        //     startMove(odiv);
+        // }
+        // for(var i = 0; i < oDivArr.length; i ++){
+        //     oDivArr[i].onmouseleave = function () {
+        //         startMove(this, 100);
+        //     }
+        // }
+        var oDivArr = document.getElementsByTagName('div');
+            oDivArr[0].onclick = function(){
+                startMove(this, 400, 'width');
+            }
+            oDivArr[1].onclick = function(){
+                startMove(this, 400, 'height');
+            }
+            oDivArr[2].onclick = function(){
+                startMove(this, 50, 'opacity');
+            }
+            oDivArr[3].onclick = function(){
+                startMove(this, 50, 'borderWidth');
+            }
+            function getStyle (obj , attr) {
+                if(obj.currentStyle){
+                    return obj.currentStyle[attr];
+                }else{
+                    return window.getComputedStyle(obj, false)[attr];
+                }
+            }
+        function startMove (obj , Target, attr) {
+            var speed;
+            var cur;
+            clearInterval(obj.timer);
+            obj.timer = setInterval(function () {
+                if(attr == 'opacity'){
+                    cur = parseFloat(getStyle(obj, attr))  * 100;
+                    
+                }else{
+                    cur = parseInt(getStyle(obj, attr));
+                }
+                speed = (Target - cur)/7;
+                speed = speed > 0 ? Math.ceil(speed) : Math.floor(speed);
+                if(Target == cur){
+                    clearInterval(obj.timer);
+                }else {
+                    if(attr == 'opacity'){
+                        obj.style.opacity = (speed + cur) / 100;
+                    }else{
+                        obj.style[attr] = cur + speed + 'px';
+                    }
+                }
+            }, 30)
+        }
+    </script>
+</body>
+</html>

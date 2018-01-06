@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        div {
+            position :absolute;
+            top :0;
+            left :0px;
+            width :100px;
+            height :100px;
+            background: yellow;
+        }
+        button {
+            position :relative;
+            top :120px;
+            width :60px;
+            height :20px;
+            background: #999;
+        }
+        span {
+            position :absolute;
+            top :0px;
+            left :600px;
+            width :1px;
+            height :100px;
+            background: #000;
+        }
+    </style>
+</head>
+<body>
+    <div></div>
+    <button>start</button>
+    <span></span>
+
+    <script>
+        var obtn = document.getElementsByTagName('button')[0];
+        var odiv = document.getElementsByTagName('div')[0];
+        var timer = null;
+        obtn.onclick = function () {
+            startMove(odiv);
+        }
+
+        function startMove (obj) {
+            var speed = 11;
+            if(obj.offsetLeft > 600){
+                speed = -1 *speed;
+            }else{
+                speed = 11;
+            }
+            clearInterval(timer);
+            timer = setInterval(function () {
+                if(Math.abs(600 - obj.offsetLeft) < Math.abs(speed)){
+                    clearInterval(timer);
+                    obj.style.left = '600px';
+                }else{
+                    obj.style.left = obj.offsetLeft + speed + 'px';
+                }
+            },30)
+        }
+
+    
+    
+    
+    
+    
+    
+    
+    </script>
+</body>
+</html>
